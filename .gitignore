@@ -1,7 +1,18 @@
 *
 !*/
 
-!*.md
+!*.hpp
+!*.cpp
+
+!buildfile
+!bootstrap.build
+!root.build
+!export.build
+!*manifest
+
 !COPYING
+!*.md
+
+!docs/images/*.png
 
 !.gitignore

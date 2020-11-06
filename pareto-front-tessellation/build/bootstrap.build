@@ -1,0 +1,7 @@
+project = lyrahgames-pareto-front-tessellation
+
+using version
+using config
+using test
+using install
+using dist
