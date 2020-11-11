@@ -9,6 +9,8 @@
 \usepackage{amsmath,mathtools,dsfont}
 \usepackage[mathcal]{euscript}
 
+\linespread{1.15}
+
 \newcommand{\naturalnumbers}{\mathds{N}}
 \newcommand{\realnumbers}{\mathds{R}}
 
@@ -55,6 +57,9 @@
 
     \subsection{Solution} % (fold)
     \label{sub:solution}
+      A simple solution would be to ignore any kind of surface construction and use the sticky point algorithm.
+      But looking at visualization and configuration this is suboptimal.
+
       \begin{enumerate}
         \item Compute Pareto points.
         \item Project Pareto points from $n$-dimensional space to the $n-1$-dimensional hyperplane with respective normal in direction $\sum_{i=1}^n e_i$.

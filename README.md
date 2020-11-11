@@ -11,3 +11,5 @@
 ![](docs/images/3d_pareto_front_tessellation_01.png)
 ![](docs/images/3d_pareto_front_tessellation_02.png)
 ![](docs/images/3d_pareto_front_projected_tessellation.png)
+
+## References
