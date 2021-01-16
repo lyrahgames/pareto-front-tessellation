@@ -1,15 +1,8 @@
-\documentclass[10pt, twoside]{article}
-\usepackage{extsizes}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[english]{babel}
-\usepackage{times}
-\usepackage{microtype}
-\usepackage[a4paper, left=40mm, right=40mm, top=30mm, bottom=30mm]{geometry}
-\usepackage{amsmath,mathtools,dsfont}
-\usepackage[mathcal]{euscript}
-
-\linespread{1.15}
+\documentclass[fleqn,10pt,twoside,twocolumn]{stdglobal}
+\let\oldsection\section
+\renewcommand*\section{\thispagestyle{sectionstyle}\oldsection}
+\let\oldpagenumbering\pagenumbering
+\renewcommand*\pagenumbering[1]{\oldpagenumbering{#1}}
 
 \newcommand{\naturalnumbers}{\mathds{N}}
 \newcommand{\realnumbers}{\mathds{R}}
@@ -18,57 +11,38 @@
 \author{Markus Pawellek}
 \date{\today}
 
+\bibliography{references}
+
+\usepackage{sectsty}
+\sectionfont{\normalsize}
+\subsectionfont{\normalsize}
+\subsubsectionfont{\normalsize}
+\paragraphfont{\normalsize}
+
+\usepackage[explicit]{titlesec}
+\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{5pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{5pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{12pt plus 4pt minus 2pt}{5pt plus 2pt minus 2pt}
+
+\geometry{left=30mm, right=30mm, top=30mm, bottom=30mm, includeheadfoot}
+
 \begin{document}
-  \maketitle
+  \selectlanguage{english}
 
-  \bigskip
-  \hrule
-  \smallskip
-  \begin{abstract}
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  \end{abstract}
-  \medskip
-  \hrule
-  \bigskip
+  \twocolumn[{
+    \maketitle
+    \import{sections/}{abstract.tex}
+    \bigskip
+  }]
 
-  \tableofcontents
-  \cleardoublepage
+  \pagenumbering{arabic}
+  \import{sections/}{problem.tex}
+  \import{sections/}{introduction.tex}
+  \import{sections/}{background.tex}
+  \import{sections/}{algorithm.tex}
+  \import{sections/}{implementation.tex}
+  \import{sections/}{results.tex}
+  \import{sections/}{conclusions.tex}
 
-  \section{Problem} % (fold)
-  \label{sec:problem}
-    \subsection{Input} % (fold)
-    \label{sub:input}
-      A discrete set of points $\mathcal{S}$ in $\realnumbers^n$ with $n\in\naturalnumbers$ is given.
-      For our purposes, $\mathcal{S}$ will be the result of a multi-objective optimization in $n$ dimensions.
-      Hence, most of the given points will form the Pareto frontier.
-    % subsection input (end)
-
-    \subsection{Output} % (fold)
-    \label{sub:output}
-      Based on the given point set $\mathcal{S}$, a triangulation or tessellation shall be computed which enables the user to securely interpolate between Pareto points, to visualize the resulting surfaces, and to localize new points fast for configuration.
-      The typical problem that has to be taken care of is that Pareto frontiers are not continuous in general.
-      Furthermore, multi-objective optimization tends to use many dimensions which are difficult to visualize.
-    % subsection output (end)
-
-    \subsection{Solution} % (fold)
-    \label{sub:solution}
-      A simple solution would be to ignore any kind of surface construction and use the sticky point algorithm.
-      But looking at visualization and configuration this is suboptimal.
-
-      \begin{enumerate}
-        \item Compute Pareto points.
-        \item Project Pareto points from $n$-dimensional space to the $n-1$-dimensional hyperplane with respective normal in direction $\sum_{i=1}^n e_i$.
-        \item Construct the $n-1$-dimensional Delaunay triangulation/tessellation of the projected points and go back to $n$ dimensions.
-        \item Statistically analyze the point distances and construct an approximating probability distribution for distances of neighboring points.
-        \item Make hypothesis tests and remove edges/facets and their adjacent triangles/simplices to get rid of non-continuous areas.
-        \item Visualize the results by projecting the data to two- and three-dimensional space and rendering it.
-        \item Use the structures for configuration by enabling fast localization of points inside the triangulation/tessellation.
-      \end{enumerate}
-    % subsection solution (end)
-  % section problem (end)
+  \printbibliography[heading=bibintoc]
 \end{document}

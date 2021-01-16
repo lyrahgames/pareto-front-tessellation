@@ -1,0 +1,3 @@
+[submodule "docs/report/utilities"]
+	path = docs/report/utilities
+	url = https://github.com/lyrahgames/latex-utilities.git

@@ -15,4 +15,6 @@
 
 !docs/images/*.png
 
+!.gitattributes
+!.gitmodules
 !.gitignore
