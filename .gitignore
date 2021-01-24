@@ -13,8 +13,6 @@
 !COPYING
 !*.md
 
-!docs/images/*.png
-
 !.gitattributes
 !.gitmodules
 !.gitignore

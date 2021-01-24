@@ -1,0 +1,7 @@
+!*.gp
+!*.pdf
+!*.dat
+
+!main.gp-style
+!main.tex-style
+!makefile

@@ -2,6 +2,34 @@
 \begin{document}
 \section{Introduction} % (fold)
 \label{sec:introduction}
+  In many different areas of science, like engineering, economics, and logistics, multiobjective optimization techniques are used to find trade-offs between multiple conflicting objectives, like maximizing the performance of a computer processor while minimizing its energy consumption.
+  Typically, there is no unique best solution for problems stated in reality.
 
+  Multiobjective optimization is able to find multiple so-called nondominated or Pareto-optimal solutions.
+  The set of all possible nondominated solutions is known as the Pareto frontier.
+  There is no mathematical reason to choose only one specific point of such a set.
+  As a consequence, in reality, human intervention is used to subjectively preference one of the found solutions to be able to get parameters which can be used for production.
+
+  Selecting Pareto-optimal points for a specific problem is not an easy task and requires further knowledge of the environment, circumstances, and causalities of the problem.
+  Therefore a lot of tools have been developed to support designers and engineers in choosing such a single solution.
+  But in general, multiobjective optimization methods only return an unsorted set of points near the Pareto frontier, making a sophisticated visualization and configuration tricky and unnatural.
+
+  Our idea involves the actual construction of the surface of the Pareto frontier.
+  Using an appropriate curved surface allows high-quality rendering techniques, such as rasterization, for visualization to be used.
+  Furthermore, approximations between similar solutions are suddenly allowed and easy to carry out.
+  Configuration would become simpler.
+
+  The main problem is that typical Pareto frontiers provide strong discontinuities and are not convex.
+  Thus, the generation of Pareto surfaces is not trivial.
+  This is especially true for more than two objective values.
+  Whereas the Pareto frontier for two objectives in general breaks down into a discrete set of one-dimensional curves in the plane where every point already has unique neighbors and the problem reduces to decide which of those are actually connected, three objective values may already result in a complicated set of one- and two-dimensional curved manifolds embedded in three-dimensional space.
+
+  For $n\in\setNatural$ with $n>2$ objective values, our method uses the $n-1$-dimensional Delaunay tessellation by projecting all points onto a hyperplane to provide a triangulation which allows every point in the set to have two or more neighbors.
+  However, the Delaunay triangulation always constructs the convex hull of all given points and will nearly every time result in too many connections.
+
+  At this point, every number of objectives can be handled the same way by using a statistical heuristic and the assumption that the generated solutions are uniformly distributed on the Pareto surface.
+  By estimating the mean and standard deviation of the distribution of distances between two neighboring points, we are able to use a hypothesis test to remove connections when their distance is too large and may exhibit discontinuities.
+
+  Applying this algorithm to the standard test problems of multiobjective optimization, as seen in figure~\ref{fig:pareto-two-objective-problems}, given in the literature and further constructed test problems, we will empirically confirm its correctness and robustness.
 % section introduction (end)
 \end{document}

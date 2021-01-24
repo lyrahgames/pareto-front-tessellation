@@ -1,0 +1,9 @@
+cxx.std = latest
+using cxx
+
+hxx{*}: extension = hpp
+cxx{*}: extension = cpp
+
+cxx.poptions =+ "-I$src_root"
+
+test.target = $cxx.target

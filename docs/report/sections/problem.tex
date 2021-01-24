@@ -22,13 +22,29 @@
     But looking at visualization and configuration this is suboptimal.
 
     \begin{enumerate}
-      \item Compute Pareto points.
-      \item Project Pareto points from $n$-dimensional space to the $n-1$-dimensional hyperplane with respective normal in direction $\sum_{i=1}^n e_i$.
-      \item Construct the $n-1$-dimensional Delaunay triangulation/tessellation of the projected points and go back to $n$ dimensions.
-      \item Statistically analyze the point distances and construct an approximating probability distribution for distances of neighboring points.
-      \item Make hypothesis tests and remove edges/facets and their adjacent triangles/simplices to get rid of non-continuous areas.
+      \item Estimate a sufficient amount of points near the actual Pareto frontier by using an appropriate multiobjective problem solver, like NSGA-II \autocite{deb2002}, which uses the crowding distance metric or an alternative similar method to provide approximately uniformly distributed points on the Pareto frontier.
+
+      \item Project the estimated points from $m$-dimensional objective vector space to the $m-1$-dimensional hyperplane with respective normal in direction $\sum_{i=1}^m e_i$.
+      Because every estimated point is not dominated by other points, the transformation is invertible and makes Delaunay tessellation of the curved Pareto surface possible.
+
+      \item Construct the $m-1$-dimensional Delaunay triangulation/tessellation of the projected points by using a state-of-the-art algorithm and apply the same tessellation to the original points in $m$-dimensional space.
+      Inverting the projection is not needed.
+      It is recommended to use a facet/edge-based data structure, like the quad-edge structure from \textcite{guibas1985} in two dimensions, to store the tessellation scheme.
+      Such a structure has to be general enough to describe arbitrary connections between points even if there is no triangle.
+      Such a structure is easy to store and transmit in binary- and ASCII-based file formats.
+      Following post computation will also become easier and triangles can be constructed by iterating through all connections.
+
+      \item Statistically analyze the distances of points to their neighbors and the estimated gradient at their position.
+      This can be done in a global sense for all points or for smaller batches of points.
+
+      \item Use a heuristic to combine those two values. Construct an approximating probability distribution for such a heuristic and learn it.
+
+      \item Make hypothesis tests based on the learned probability distribution and remove point connections from the tessellation that do not fulfill the test.
+      They could exhibit discontinuities.
+
       \item Visualize the results by projecting the data to two- and three-dimensional space and rendering it.
-      \item Use the structures for configuration by enabling fast localization of points inside the triangulation/tessellation.
+
+      \item Use the Delaunay tessellation structure for configuration by using fast localization of points \autocite{guibas1985}.
     \end{enumerate}
   % subsection solution (end)
 % section problem (end)

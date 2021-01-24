@@ -1,8 +1,4 @@
 \documentclass[fleqn,10pt,twoside,twocolumn]{stdglobal}
-\let\oldsection\section
-\renewcommand*\section{\thispagestyle{sectionstyle}\oldsection}
-\let\oldpagenumbering\pagenumbering
-\renewcommand*\pagenumbering[1]{\oldpagenumbering{#1}}
 
 \newcommand{\naturalnumbers}{\mathds{N}}
 \newcommand{\realnumbers}{\mathds{R}}
@@ -20,29 +16,51 @@
 \paragraphfont{\normalsize}
 
 \usepackage[explicit]{titlesec}
-\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{5pt plus 2pt minus 2pt}
-\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{5pt plus 2pt minus 2pt}
-\titlespacing\subsubsection{0pt}{12pt plus 4pt minus 2pt}{5pt plus 2pt minus 2pt}
+\titlespacing\section{0pt}{10pt plus 4pt minus 2pt}{2pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{10pt plus 4pt minus 2pt}{2pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{10pt plus 4pt minus 2pt}{2pt plus 2pt minus 2pt}
 
-\geometry{left=30mm, right=30mm, top=30mm, bottom=30mm, includeheadfoot}
+% \let\oldsection\section
+% \renewcommand*\section{\thispagestyle{sectionstyle}\oldsection}
+% \let\oldpagenumbering\pagenumbering
+% \renewcommand*\pagenumbering[1]{\oldpagenumbering{#1}}
 
 \begin{document}
   \selectlanguage{english}
 
   \twocolumn[{
-    \maketitle
+    % \maketitle
+    \thispagestyle{sectionstyle}
+    VIPO: Simulation Driven Product and Process Optimization (2021) \\
+    \url{https://www.vipo-net.de/}
+    \bigskip
+    \begin{center}
+      \LARGE
+      \bfseries
+      Generating Tessellations of $n$-dimensional Pareto Frontiers for Visualization and Configuration
+    \end{center}
+    \bigskip
+    \begin{center}
+      Markus Pawellek \quad Ralf Hohmann \quad Matthias Schwuchow
+    \end{center}
+    \begin{center}
+      \small
+      ORISA Software GmbH
+    \end{center}
     \import{sections/}{abstract.tex}
     \bigskip
   }]
 
   \pagenumbering{arabic}
-  \import{sections/}{problem.tex}
   \import{sections/}{introduction.tex}
   \import{sections/}{background.tex}
+  \import{sections/}{problem.tex}
   \import{sections/}{algorithm.tex}
   \import{sections/}{implementation.tex}
   \import{sections/}{results.tex}
   \import{sections/}{conclusions.tex}
+  % \import{sections/}{problem.tex}
 
+  \nocite{*}
   \printbibliography[heading=bibintoc]
 \end{document}

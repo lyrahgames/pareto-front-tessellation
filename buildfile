@@ -1,2 +1,2 @@
-import pkgs = pareto-front-tessellation/
+import pkgs = pareto-front-tessellation/ pareto-front-cut/
 ./: $pkgs
