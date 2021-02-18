@@ -4,26 +4,45 @@
 \label{sec:background}
   \subsection{Multiobjective Optimization} % (fold)
   \label{sub:multiobjective_optimization}
-    \begin{definition*}[Multiobjective Optimization Problem]
-      Let $n\in\setNatural$ be the number of configuration variables, $m\in\setNatural$ with $m\geq 2$ be the number of objective values, and $X\subset\setReal^n$ the configuration space or the set of feasible solutions.
-      Furthermore, let $\function{f}{X}{\setReal^m}$ be the cost function.
-      Then we call the following a multiobjective optimization problem.
-      \[
-        \minimize_{x\in X} f(x)
-      \]
-    \end{definition*}
+    The general goal of mathematical optimization is to quantify an optimal set of input parameters, which we call a configuration, that minimizes or maximizes a given cost function.
+    For single-objective cost functions whose range is the space of real numbers, the natural total ordering of the real axis is intuitively used to decide which configuration leads to better results by comparing their outcome of the cost function.
+
+    In multi-objective optimization the range of a cost function is multi-dimensional.
+    Because there is no natural ordering of multi-dimensional real vector spaces, we have to clearly define what it means for a configuration to be more optimal than another one.
     \begin{definition*}[Domination]
-      Let $x,y\in X$.
-      Then $x$ (Pareto) dominates $y$, if the following is true.
-      \begin{enumerate}
-        \item $\forall k\in\setNatural, k\leq m:\quad f_k(x)\leq f_k(y)$
-        \item $\exists k\in\setNatural, k\leq m:\quad f_k(x) < f_k(y)$
+      For $n\in\setNatural$, let $x,y\in \setReal^n$.
+      Then we say $x$ dominates $y$ or $x\prec y$, if the following is true.
+      \begin{enumerate}[label={(\arabic*)}]
+        \item $\forall k\in\setNatural, k\leq m:\quad x_k\leq y_k$
+        \item $\exists k\in\setNatural, k\leq m:\quad x_k < y_k$
       \end{enumerate}
     \end{definition*}
-
+    This induces only a partial ordering for multi-dimensional spaces but seems to suffice for the typical optimization problems.
+    Based on this definition, we can go even further and are able to define optimal values for multi-dimensional subsets.
     \begin{definition*}[Pareto Optimality]
-      A point $x\in X$ is said to be nondominated or Pareto optimal, if there is no other point $y\in X$ which is dominating it.
+      Let $n\in\setNatural$ and $X\subset\setReal^n$. A point $x\in X$ is said to be non-dominated or (Pareto) optimal, if there is no other point $y\in X$ which is dominating it.
+      We denote $\mathrm{Pareto}(X)$ as the set of all (Pareto) optimal solutions in $X$.
     \end{definition*}
+    With the concept of Pareto optimality, multi-objective optimization problems can be defined in the typical sense of single-objective optimization.
+    \begin{definition*}[Multi-Objective Optimization Problem]
+      Let $n\in\setNatural$ be the number of configuration variables, $m\in\setNatural$ with $m\geq 2$ be the number of objective values, and $X\subset\setReal^n$ the configuration space or the set of feasible solutions.
+      Furthermore, let $\function{f}{X}{\setReal^m}$ be the cost function.
+      Then we call the following the multi-objective optimization problem $\mathcal{P}$.
+      \[
+        \mathcal{P} \define \minimize_{x\in X} f(x)
+      \]
+      The solution $\mathcal{S}(\mathcal{P})$ to this problem is then given by the following subset of the graph of $f$ based on the configurations which map to the Pareto frontier.
+      \[
+        \mathcal{S}(\mathcal{P}) \define
+        \set{(x,f(x))}{
+        \begin{aligned}
+          x &\in X, \\
+          f(x) &\in \mathrm{Pareto}(\mathrm{im} f)
+        \end{aligned}
+        }
+      \]
+    \end{definition*}
+    Typical multi-objective optimization problems which are also used as benchmarks for numerical solvers are given in table \ref{tab:pareto-two-objective-problems} and a visualization of their respective Pareto frontiers is given in figure \ref{fig:pareto-two-objective-problems}.
 
     \begin{figure*}[t]
       \center
